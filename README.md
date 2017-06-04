@@ -12,3 +12,9 @@ Summer 2017 skill improvement and best practice usage. Blog with Spring Boot, Sp
 * Travis build for build overview
 * Versioneye for dependencies overview
 * Coveralls for code coverage overview
+
+## Road Map
+1) Spring Boot base
+2) Support for all usable plugins (Checkstyle, PMD, Findbugs)
+3) Add Versioneye
+4) Add Coveralls and Travis build
