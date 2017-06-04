@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DregHeapBackendApplication {
+public class DregHeap {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DregHeapBackendApplication.class, args);
+		SpringApplication.run(DregHeap.class, args);
 	}
 }
