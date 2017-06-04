@@ -1,4 +1,4 @@
-# the-dreg-heap
+# The Dreg Heap
 Summer 2017 skill improvement and best practice usage. Blog with Spring Boot, Spring Data MongoDB, JWT authentication.
 
 ## Technologies
