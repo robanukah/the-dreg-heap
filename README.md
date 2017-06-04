@@ -18,3 +18,19 @@ Summer 2017 skill improvement and best practice usage. Blog with Spring Boot, Sp
 2) Support for all usable plugins (Checkstyle, PMD, Findbugs)
 3) Add Versioneye
 4) Add Coveralls and Travis build
+
+## Running
+
+ * If you have gradle installed use next
+ 
+```
+ gradle bootRun
+```
+
+* Otherwise
+
+```
+./gradlew build
+java -jar build/libs/dreg-heap-backend-0.0.1-SNAPSHOT.jar
+
+```
