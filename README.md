@@ -1,6 +1,8 @@
 # The Dreg Heap
 Summer 2017 skill improvement and best practice usage. Blog with Spring Boot, Spring Data MongoDB, JWT authentication.
 
+[![Dependency Status](https://www.versioneye.com/user/projects/5935acbf368b08001bbdb614/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5935acbf368b08001bbdb614)
+
 ## Technologies
 * Spring Boot as base
 * Spring Data as db access technology
