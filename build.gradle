@@ -1,14 +1,16 @@
 buildscript {
-    ext {
-        springBootVersion = '1.5.3.RELEASE'
-    }
+
+    apply from: 'dependencies.gradle'
+
     repositories {
         mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath('org.standardout:gradle-versioneye-plugin:1.4.0')
+
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${versions.springboot}")
+        classpath("org.standardout:gradle-versioneye-plugin:${versions.versioneye}")
+
     }
 }
 
@@ -32,5 +34,4 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
