@@ -19,6 +19,12 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'idea'
 apply plugin: 'org.standardout.versioneye'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "findbugs"
+apply plugin: "pmd"
+apply plugin: 'checkstyle'
+apply plugin: 'groovy'
+apply plugin: "jacoco"
 
 jar {
     baseName = 'dreg-heap-backend'
@@ -34,4 +40,56 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile 'org.codehaus.groovy:groovy-all:2.4.10'
 }
+
+
+findbugs {
+    toolVersion = "3.0.1"
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "max"
+}
+
+pmd {
+    toolVersion = "5.7.0"
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/pmd")
+    ruleSets = [ "java-basic", "java-strings", "java-braces" ]
+}
+
+checkstyle {
+    toolVersion = "7.8.1"
+    configFile = new File(rootDir, "src/main/resources/config/chekstyle/checkstyle.xml")
+}
+
+check << {
+    File outDir = new File('build/reports/pmd/')
+    outDir.mkdirs()
+    ant.taskdef(name: 'cpd', classname: 'net.sourceforge.pmd.cpd.CPDTask',
+            classpath: configurations.pmd.asPath)
+    ant.cpd(minimumTokenCount: '100', format: 'xml',
+            outputFile: new File(outDir , 'cpd.xml')) {
+        fileset(dir: "src/main/java") {
+            include(name: '**/*.java')
+        }
+    }
+}
+
+jacoco {
+    toolVersion = "0.7.9"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+
