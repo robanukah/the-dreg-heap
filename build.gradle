@@ -1,15 +1,13 @@
 buildscript {
 
-    apply from: 'dependencies.gradle'
-
     repositories {
         mavenCentral()
         jcenter()
     }
     dependencies {
 
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${versions.springboot}")
-        classpath("org.standardout:gradle-versioneye-plugin:${versions.versioneye}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.standardout:gradle-versioneye-plugin:${versioneyeVersion}")
 
     }
 }
@@ -41,12 +39,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    compile 'org.codehaus.groovy:groovy-all:2.4.10'
+    compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
 }
 
-
 findbugs {
-    toolVersion = "3.0.1"
+    toolVersion = "${findbugsVersion}"
     ignoreFailures = true
     sourceSets = [sourceSets.main]
     reportsDir = file("$project.buildDir/reports/findbugs")
@@ -54,16 +51,16 @@ findbugs {
 }
 
 pmd {
-    toolVersion = "5.7.0"
+    toolVersion = "${pmdVersion}"
     ignoreFailures = true
     sourceSets = [sourceSets.main]
     reportsDir = file("$project.buildDir/reports/pmd")
-    ruleSets = [ "java-basic", "java-strings", "java-braces" ]
+    ruleSets = ["java-basic", "java-strings", "java-braces"]
 }
 
 checkstyle {
-    toolVersion = "7.8.1"
-    configFile = new File(rootDir, "src/main/resources/config/chekstyle/checkstyle.xml")
+    toolVersion = "${checkstyleVersion}"
+    configFile = new File(rootDir, "build-tools/quality/config/chekstyle/checkstyle.xml")
 }
 
 check << {
@@ -72,7 +69,7 @@ check << {
     ant.taskdef(name: 'cpd', classname: 'net.sourceforge.pmd.cpd.CPDTask',
             classpath: configurations.pmd.asPath)
     ant.cpd(minimumTokenCount: '100', format: 'xml',
-            outputFile: new File(outDir , 'cpd.xml')) {
+            outputFile: new File(outDir, 'cpd.xml')) {
         fileset(dir: "src/main/java") {
             include(name: '**/*.java')
         }
@@ -80,7 +77,7 @@ check << {
 }
 
 jacoco {
-    toolVersion = "0.7.9"
+    toolVersion = "${jacocoVersion}"
     reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
