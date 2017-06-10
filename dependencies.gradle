@@ -1,7 +1,1 @@
-ext {
-    //Support Libraries dependencies
-    versions = [
-            springboot: '1.5.3.RELEASE',
-            versioneye: '1.4.0'
-    ]
-}
+

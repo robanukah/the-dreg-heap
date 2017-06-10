@@ -1,15 +1,13 @@
 buildscript {
 
-    apply from: 'dependencies.gradle'
-
     repositories {
         mavenCentral()
         jcenter()
     }
     dependencies {
 
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${versions.springboot}")
-        classpath("org.standardout:gradle-versioneye-plugin:${versions.versioneye}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.standardout:gradle-versioneye-plugin:${versioneyeVersion}")
 
     }
 }
@@ -19,6 +17,12 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'idea'
 apply plugin: 'org.standardout.versioneye'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "findbugs"
+apply plugin: "pmd"
+apply plugin: 'checkstyle'
+apply plugin: 'groovy'
+apply plugin: "jacoco"
 
 jar {
     baseName = 'dreg-heap-backend'
@@ -38,4 +42,55 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
 }
+
+findbugs {
+    toolVersion = "${findbugsVersion}"
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "max"
+}
+
+pmd {
+    toolVersion = "${pmdVersion}"
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/pmd")
+    ruleSets = ["java-basic", "java-strings", "java-braces"]
+}
+
+checkstyle {
+    toolVersion = "${checkstyleVersion}"
+    configFile = new File(rootDir, "build-tools/quality/config/chekstyle/checkstyle.xml")
+}
+
+check << {
+    File outDir = new File('build/reports/pmd/')
+    outDir.mkdirs()
+    ant.taskdef(name: 'cpd', classname: 'net.sourceforge.pmd.cpd.CPDTask',
+            classpath: configurations.pmd.asPath)
+    ant.cpd(minimumTokenCount: '100', format: 'xml',
+            outputFile: new File(outDir, 'cpd.xml')) {
+        fileset(dir: "src/main/java") {
+            include(name: '**/*.java')
+        }
+    }
+}
+
+jacoco {
+    toolVersion = "${jacocoVersion}"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+
