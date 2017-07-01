@@ -2,6 +2,7 @@ package com.github.dregheap.service;
 
 import com.github.dregheap.model.Post;
 import com.github.dregheap.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,14 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultPostService implements PostService {
 
     private final PostRepository postRepository;
-
-    @Autowired
-    public DefaultPostService(final PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
 
     @Override
     public List<Post> findAll() {

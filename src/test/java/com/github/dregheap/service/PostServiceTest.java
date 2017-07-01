@@ -85,7 +85,7 @@ public class PostServiceTest {
 
         when(postRepository.save(post)).thenReturn(post);
 
-        Post newPost = postService.createPost(post);
+        Post newPost = postService.create(post);
 
         assertThat(newPost).isEqualTo(post);
 
@@ -99,7 +99,7 @@ public class PostServiceTest {
 
         when(postRepository.save(post)).thenReturn(post);
 
-        Post newPost = postService.updatePost(post);
+        Post newPost = postService.update(post);
 
         assertThat(newPost).isEqualTo(post);
 
@@ -109,7 +109,7 @@ public class PostServiceTest {
     @Test
     public void deletePostShouldDeletePost() {
         Post post = new Post();
-        postService.deletePost(post);
+        postService.delete(post);
 
         verify(postRepository).delete(post);
     }
