@@ -12,6 +12,6 @@ public class HelloController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getHelloMessage() {
-        return new ResponseEntity("Hello world!", HttpStatus.OK);
+        return new ResponseEntity<>("Hello world!", HttpStatus.OK);
     }
 }
