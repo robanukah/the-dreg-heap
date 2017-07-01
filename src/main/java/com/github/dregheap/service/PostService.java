@@ -12,11 +12,13 @@ public interface PostService {
 
     Page<Post> findAll(Pageable pageable);
 
-//    Post findOne(String id);
+    Post findById(String id);
 
-    Post createPost(Post post);
+    Post create(Post post);
 
-    Post updatePost(Post post);
+    Post update(Post post);
 
-    void deletePost(Post post);
+    void delete(Post post);
+
+    void deleteById(String id);
 }

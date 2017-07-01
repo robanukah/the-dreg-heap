@@ -3,7 +3,6 @@ package com.github.dregheap.service;
 import com.github.dregheap.model.Post;
 import com.github.dregheap.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class DefaultPostService implements PostService {
     private final PostRepository postRepository;
 
     @Autowired
-    public DefaultPostService(PostRepository postRepository) {
+    public DefaultPostService(final PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
@@ -30,25 +29,29 @@ public class DefaultPostService implements PostService {
         return postRepository.findAll(pageable);
     }
 
-//    @Override
-//    public Post findOne(String id) {
-//        return postRepository.findOne()
-//    }
+    @Override
+    public Post findById(String id) {
+        return postRepository.findOne(id);
+    }
 
     @Override
-    public Post createPost(Post post) {
-
+    public Post create(Post post) {
         post.setId(null);
         return postRepository.save(post);
     }
 
     @Override
-    public Post updatePost(Post post) {
+    public Post update(Post post) {
         return postRepository.save(post);
     }
 
     @Override
-    public void deletePost(Post post) {
+    public void delete(Post post) {
         postRepository.delete(post);
+    }
+
+    @Override
+    public void deleteById(String id) {
+        postRepository.delete(id);
     }
 }
