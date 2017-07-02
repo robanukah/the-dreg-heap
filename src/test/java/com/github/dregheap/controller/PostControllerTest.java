@@ -57,8 +57,6 @@ public class PostControllerTest {
         when(postService.findAll()).thenReturn(postList);
         when(postService.findAll(pageRequest)).thenReturn(pageList);
 
-        System.out.println(objectWriter.writeValueAsString(postList));
-
         mvc.perform(get("/api/v1/posts"))
                 .andExpect(status().isOk()).andExpect(content().json(objectWriter.writeValueAsString(postList)));
     }
