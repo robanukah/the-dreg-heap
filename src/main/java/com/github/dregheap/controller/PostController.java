@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/api/v1/posts")
 public class PostController {
-
     private final PostService postService;
 
     @RequestMapping(method = RequestMethod.GET)

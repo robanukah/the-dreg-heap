@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor(onConstructor=@__(@Autowired))
 public class DefaultPostService implements PostService {
-
     private final PostRepository postRepository;
 
     @Override

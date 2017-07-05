@@ -89,7 +89,6 @@ public class PostControllerTest {
 
     @Test
     public void detelePostShouldReturnStatusOK() throws Exception {
-
         Post post = new Post();
 
         doNothing().when(postService).delete(post);

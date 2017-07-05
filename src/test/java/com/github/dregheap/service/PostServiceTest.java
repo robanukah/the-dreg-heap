@@ -26,7 +26,7 @@ public class PostServiceTest {
     @Mock
     private PostRepository postRepository;
 
-    PostService postService;
+    private PostService postService;
 
     @Before
     public void setUp() {
@@ -35,7 +35,6 @@ public class PostServiceTest {
 
     @Test
     public void getAllPostsShouldReturnPostsList() {
-
         List<Post> posts = new ArrayList<>(Arrays.asList(new Post(), new Post(), new Post()));
 
         when(postRepository.findAll()).thenReturn(posts);
@@ -49,11 +48,10 @@ public class PostServiceTest {
 
     @Test
     public void getAllPostsShouldReturnPagedList() {
-
         List<Post> list1 = new ArrayList<>(Arrays.asList(new Post(), new Post(), new Post()));
-        Page<Post> page1 = new PageImpl<Post>(list1.subList(0, 2));
-        Page<Post> page2 = new PageImpl<Post>(list1.subList(2, 3));
-        Page<Post> page3 = new PageImpl<Post>(new ArrayList<>());
+        Page<Post> page1 = new PageImpl<>(list1.subList(0, 2));
+        Page<Post> page2 = new PageImpl<>(list1.subList(2, 3));
+        Page<Post> page3 = new PageImpl<>(new ArrayList<>());
 
         PageRequest pgrq1 = new PageRequest(0, 2);
         PageRequest pgrq2 = new PageRequest(1, 2);
@@ -94,7 +92,6 @@ public class PostServiceTest {
 
     @Test
     public void updatePostShouldUpdatePost() {
-
         Post post = new Post();
 
         when(postRepository.save(post)).thenReturn(post);
