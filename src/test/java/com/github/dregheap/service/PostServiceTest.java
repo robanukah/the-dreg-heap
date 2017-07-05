@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PostServiceTest {
-
     @Mock
     private PostRepository postRepository;
 
