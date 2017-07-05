@@ -1,18 +1,17 @@
 package com.github.dregheap.controller;
 
-
 import com.github.dregheap.model.Post;
 import com.github.dregheap.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor=@__(@Autowired))
 @RequestMapping(path = "/api/v1/posts")
 public class PostController {
 

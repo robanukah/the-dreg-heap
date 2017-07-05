@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor=@__(@Autowired))
 public class DefaultPostService implements PostService {
 
     private final PostRepository postRepository;
