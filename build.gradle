@@ -8,7 +8,6 @@ buildscript {
 
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.standardout:gradle-versioneye-plugin:${versioneyeVersion}")
-
     }
 }
 
@@ -42,8 +41,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile("org.codehaus.groovy:groovy-all:${groovyVersion}")
+    compileOnly("org.projectlombok:lombok")
 }
 
 findbugs {
