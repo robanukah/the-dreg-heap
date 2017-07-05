@@ -13,7 +13,4 @@ public class Post {
     private String userId;
     private String topicId;
     private String postMessage;
-
-    public Post() {
-    }
 }
