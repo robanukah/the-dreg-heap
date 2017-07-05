@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor(onConstructor=@__(@Autowired))
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(path = "/api/v1/posts")
 public class PostController {
 
@@ -39,7 +39,8 @@ public class PostController {
 
     @RequestMapping(method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity updatePost(@RequestBody Post post) {
-        return new ResponseEntity<>(postService.update(post), HttpStatus.NO_CONTENT);
+        postService.update(post);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
